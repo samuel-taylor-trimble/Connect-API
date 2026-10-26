@@ -53,9 +53,9 @@ The client secret is not part of this extension. Connect already has the user se
 
 Capability manifest URL:
 
-`https://raw.githack.com/samuel-taylor-trimble/Connect-API/gh-pages/manifest.json`
+`https://rawcdn.githack.com/samuel-taylor-trimble/Connect-API/ee7ecbae80adba39be916fa35a7f9b71ca0ca098/manifest.json`
 
-In the project, open Settings → Apps & Capabilities → Add Custom and paste that URL. The extension files are in this repository on the `gh-pages` branch. That URL serves `manifest.json` as JSON with `Access-Control-Allow-Origin: *`, and serves the extension page as HTML so Connect can embed it.
+In the project, open Settings → Apps & Capabilities → Add Custom and paste that URL. The extension files are in this repository on the `gh-pages` branch. That address serves `manifest.json` as JSON with `Access-Control-Allow-Origin: *`, and the page it points to is served as HTML so Connect can embed it.
 
 GitHub Pages is not enabled on this repository, and the GitHub connection used here cannot change that setting. `https://samuel-taylor-trimble.github.io/Connect-API/` currently returns 404.
 
