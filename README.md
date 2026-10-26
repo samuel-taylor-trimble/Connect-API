@@ -53,11 +53,11 @@ The client secret is not part of this extension. Connect already has the user se
 
 Capability manifest URL:
 
-`https://cdn.jsdelivr.net/gh/samuel-taylor-trimble/Connect-API@gh-pages/manifest.json`
+`https://raw.githack.com/samuel-taylor-trimble/Connect-API/gh-pages/manifest.json`
 
-In the project, open Settings → Apps & Capabilities → Add Custom and paste that URL. The files are in this GitHub repository on the `gh-pages` branch. jsDelivr publishes them with the CORS header Trimble Connect needs when it downloads the manifest, and without a frame block so Connect can embed the page.
+In the project, open Settings → Apps & Capabilities → Add Custom and paste that URL. The extension files are in this repository on the `gh-pages` branch. That URL serves `manifest.json` as JSON with `Access-Control-Allow-Origin: *`, and serves the extension page as HTML so Connect can embed it.
 
-GitHub Pages is not enabled on this repository, and the GitHub connection used here cannot change that repository setting. After Pages is enabled in the repository settings, the same `extension` files can be served from `https://samuel-taylor-trimble.github.io/Connect-API/`.
+GitHub Pages is not enabled on this repository, and the GitHub connection used here cannot change that setting. `https://samuel-taylor-trimble.github.io/Connect-API/` currently returns 404.
 
 For a local copy instead of the published URL:
 

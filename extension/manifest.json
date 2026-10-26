@@ -1,8 +1,8 @@
 {
   "title": "Video viewer",
   "description": "Play project video files inside Trimble Connect for Browser.",
-  "url": "https://cdn.jsdelivr.net/gh/samuel-taylor-trimble/Connect-API@gh-pages/index.html",
-  "icon": "https://cdn.jsdelivr.net/gh/samuel-taylor-trimble/Connect-API@gh-pages/icon.svg",
-  "infoUrl": "https://cdn.jsdelivr.net/gh/samuel-taylor-trimble/Connect-API@gh-pages/index.html",
+  "url": "https://raw.githack.com/samuel-taylor-trimble/Connect-API/gh-pages/index.html",
+  "icon": "https://raw.githack.com/samuel-taylor-trimble/Connect-API/gh-pages/icon.svg",
+  "infoUrl": "https://raw.githack.com/samuel-taylor-trimble/Connect-API/gh-pages/index.html",
   "extensionType": ["project"]
 }
