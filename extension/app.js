@@ -54,7 +54,7 @@ function hostedByTrimble() {
 function showSetup() {
   setupNode.hidden = false;
   refreshButton.hidden = true;
-  const manifest = new URL("/manifest.json", window.location.href);
+  const manifest = new URL("manifest.json", window.location.href);
   setupNode.querySelector("[data-manifest]").textContent = manifest.href;
   setStatus("Add the extension to a project to play its videos.");
 }
@@ -69,7 +69,7 @@ async function connectExtension() {
   try {
     await api.ui.setMenu({
       title: "Videos",
-      icon: new URL("/icon.svg", window.location.href).href,
+      icon: new URL("icon.svg", window.location.href).href,
       command: "videos",
     });
   } catch {

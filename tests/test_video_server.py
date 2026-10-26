@@ -8,11 +8,19 @@ import unittest
 import urllib.error
 import urllib.request
 from http.server import ThreadingHTTPServer
+from pathlib import Path
 
 from connect_api.video_server import VideoExtensionHandler, manifest_document
 
 
 class ManifestTests(unittest.TestCase):
+    def test_published_manifest_is_an_absolute_capability_url(self) -> None:
+        document = json.loads((Path(__file__).resolve().parents[1] / "extension" / "manifest.json").read_text())
+        self.assertEqual(document["extensionType"], ["project"])
+        self.assertTrue(str(document["url"]).startswith("https://"))
+        self.assertTrue(str(document["icon"]).startswith("https://"))
+        self.assertIn("samuel-taylor-trimble/Connect-API", document["url"])
+
     def test_manifest_points_at_the_extension_page(self) -> None:
         document = manifest_document("https://videos.example/")
         self.assertEqual(document["url"], "https://videos.example/")
@@ -45,7 +53,7 @@ class ServerTests(unittest.TestCase):
         with urllib.request.urlopen(f"{self.base}/") as response:
             page = response.read().decode()
         self.assertIn("Video viewer", page)
-        self.assertIn("/app.js", page)
+        self.assertIn('src="app.js"', page)
         with self.assertRaises(urllib.error.HTTPError) as raised:
             urllib.request.urlopen(f"{self.base}/%2e%2e/connect_api/cli.py")
         self.assertEqual(raised.exception.code, 404)

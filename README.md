@@ -51,17 +51,25 @@ Connect for Browser does not play project videos in its own viewer. This reposit
 
 The client secret is not part of this extension. Connect already has the user session.
 
+Capability manifest URL:
+
+`https://cdn.jsdelivr.net/gh/samuel-taylor-trimble/Connect-API@gh-pages/manifest.json`
+
+In the project, open Settings → Apps & Capabilities → Add Custom and paste that URL. The files are in this GitHub repository on the `gh-pages` branch. jsDelivr publishes them with the CORS header Trimble Connect needs when it downloads the manifest, and without a frame block so Connect can embed the page.
+
+GitHub Pages is not enabled on this repository, and the GitHub connection used here cannot change that repository setting. After Pages is enabled in the repository settings, the same `extension` files can be served from `https://samuel-taylor-trimble.github.io/Connect-API/`.
+
+For a local copy instead of the published URL:
+
 ```bash
 python3 -m connect_api video
 ```
 
-Leave that process running, then in the project open Settings → Apps & Capabilities → Add Custom and paste:
-
-`http://127.0.0.1:8090/manifest.json`
+That serves `http://127.0.0.1:8090/manifest.json` on the same computer as the browser.
 
 A project administrator has to add it. Open Videos in the project navigation and allow the access-token prompt. The panel lists `.mp4`, `.m4v`, `.webm`, `.ogg`, `.ogv`, and `.mov` files, including files in subfolders. Choosing one requests `GET /files/fs/{fileId}/downloadurl` and plays that URL.
 
-The file calls use the Core 2.0 API (`/tc/api/2.0`), because that is the published contract with a download URL. The extension reads `GET /regions` and uses the `tc-api` host for the project's `location`. Playback runs in the browser on the same computer as the server. Set `VIDEO_PUBLIC_URL` to an HTTPS origin if the extension is hosted somewhere other than this machine.
+The file calls use the Core 2.0 API (`/tc/api/2.0`), because that is the published contract with a download URL. The extension reads `GET /regions` and uses the `tc-api` host for the project's `location`.
 
 ## What is implemented
 
