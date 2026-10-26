@@ -45,6 +45,24 @@ python3 -m connect_api call GET /regions
 
 `client-credentials` requests an application token. Connect data for a signed-in user uses `login`. The scopes sent on login are `openid` and `connect`.
 
+## Play videos in Trimble Connect for Browser
+
+Connect for Browser does not play project videos in its own viewer. This repository serves a project extension that Connect embeds. The extension asks Connect for the signed-in user's access token, lists video files through the published Core file API, and plays the selected file in the page.
+
+The client secret is not part of this extension. Connect already has the user session.
+
+```bash
+python3 -m connect_api video
+```
+
+Leave that process running, then in the project open Settings → Apps & Capabilities → Add Custom and paste:
+
+`http://127.0.0.1:8090/manifest.json`
+
+A project administrator has to add it. Open Videos in the project navigation and allow the access-token prompt. The panel lists `.mp4`, `.m4v`, `.webm`, `.ogg`, `.ogv`, and `.mov` files, including files in subfolders. Choosing one requests `GET /files/fs/{fileId}/downloadurl` and plays that URL.
+
+The file calls use the Core 2.0 API (`/tc/api/2.0`), because that is the published contract with a download URL. The extension reads `GET /regions` and uses the `tc-api` host for the project's `location`. Playback runs in the browser on the same computer as the server. Set `VIDEO_PUBLIC_URL` to an HTTPS origin if the extension is hosted somewhere other than this machine.
+
 ## What is implemented
 
 Trimble has not published the Core v2 OpenAPI definition yet. This client implements the flow and the Connect call that the current docs specify:

@@ -53,6 +53,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     call.add_argument("--query", action="append", default=[], metavar="KEY=VALUE")
     call.add_argument("--json", dest="json_body", default=None, help="JSON request body.")
 
+    video = sub.add_parser("video", help="Serve the in-browser Trimble Connect video extension.")
+    video.add_argument("--port", type=int, default=8090)
+
     args = parser.parse_args(argv)
     try:
         if args.command == "login":
@@ -69,6 +72,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             _print(ConnectClient(_access_token(), region=region_name()).regions())
         elif args.command == "call":
             _print(_call(args.method, args.path, args.query, args.json_body))
+        elif args.command == "video":
+            from connect_api.video_server import serve
+
+            serve(args.port)
         else:
             parser.error(f"Unknown command {args.command}")
     except (TrimbleError, RuntimeError, ValueError) as error:
